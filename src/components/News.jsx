@@ -2,13 +2,21 @@ import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 
 export class News extends Component {
-  constructor(){
-    super();
+  titleCase(str) {
+    str = str.toLowerCase().split(' ');
+    for (var i = 0; i < str.length; i++) {
+      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+    }
+    return str.join(' ');
+  }
+  constructor(props){
+    super(props);
     this.state = {
       articles : [],
       loading : false,
       page:1,
     }
+    document.title = `${this.titleCase(this.props.category)} - Quick News`
   }
 async componentDidMount(){
   let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=5dd2521d30eb4b3981419cf4157ff6f0&pageSize=6`;
@@ -45,7 +53,8 @@ handleNextClick = async () => {
   render() {
     return (
       <div className="container">
-        <h2 className='text-center'>Top Headlines</h2>
+        <h2 className='text-center p-2'>Quick news</h2>
+        <h2 className='text-center'>Top {`${this.titleCase(this.props.category)} `}Headlines</h2>
         <div className="row mt-3">
         {this.state.articles.map((e) => {
           return <div className="col-md-4" key={e.url} >

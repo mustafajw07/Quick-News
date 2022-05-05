@@ -11,20 +11,13 @@ export default class App extends Component {
   }
   constructor() {
     super();
-    this.state = {mode:'light'};
-  }
-  toggleMode = () =>{
-    if(this.state.mode==='light'){
-      this.setState({mode:'dark'})
-    }else{
-      this.setState({mode:'light'})
-    }
+    this.state = {mode:'dark'};
   }
   render() {
     return (
       <Router>
         <div> 
-        <Navbar mode={this.state.mode} toggleMode={this.toggleMode}/>  
+        <Navbar mode={this.state.mode}/>  
       <Routes>
     <Route exact path="/" element={<News key="general" country='in' category='general' />} />
     <Route exact path="/sports" element={<News key="sports" country='in' category='sports' />} />

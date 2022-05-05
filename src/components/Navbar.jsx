@@ -37,11 +37,6 @@ return <>
             <Link className="nav-link" to="/health">Health</Link>
           </li>
         </ul>
-        <div className={`form-check form-switch text-${this.props.mode==='light' ?'dark':'light'}`}>
-          <input className="form-check-input" onClick={this.props.toggleMode} type="checkbox" role="switch"
-            id="flexSwitchCheckDefault" />
-          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable Dark Mode</label>
-        </div>
       </div>
     </div>
   </nav>
