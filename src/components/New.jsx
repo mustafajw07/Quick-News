@@ -10,7 +10,7 @@ function New() {
   
 
   async function componentDidMount(){
-    let url = `https://newsapi.org/v2/top-headlines?country=in&&category=general&apiKey=cf6831c1fafd4d08b89320e3b1e60df3&pageSize=6`;
+    let url = `https://newsapi.org/v2/top-headlines?country=in&&category=general&apiKey=${this.props.apiKey}&pageSize=6`;
     let data = await fetch(url);
     let parseData = await data.json()
     setArticles([])
