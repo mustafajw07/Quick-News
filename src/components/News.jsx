@@ -6,7 +6,6 @@ import NewsItem from "./NewsItem";
 const News = (props) => {
   const [articles, setArticles] = useState([]);
   const [totalResults,setTotalResult] = useState(0);
-  const [page, setPage] = useState(1);
 
   const titleCase = (str) => {
     str = str.toLowerCase().split(' ');
@@ -18,32 +17,15 @@ const News = (props) => {
     document.title = `${titleCase(props.category)} - Quick News`
 
   const updateNews = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&pageSize=6`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&pageSize=${100}`;
     let data = await fetch(url);
     let parseData = await data.json()
     setArticles(parseData.articles);
     setTotalResult(parseData.totalResults)
   }
-  
 useEffect(() => {
   updateNews();
 }, []);
-
-
-
-const handleNextClick = async () => {
-  if(!page+1>Math.ceil(totalResults/20)){
-
-  }else{
-    setPage(page+1)
-    updateNews();
-  } 
-}
- 
- const handlePrevClick = async () => {
-  setPage(page-1)
-  updateNews();
-}
 
     return (
       <div className="container">
@@ -55,11 +37,6 @@ const handleNextClick = async () => {
           <NewsItem title ={e.title} description={e.description} imageUrl={e.urlToImage} newsUrl = {e.url}/>
         </div>
         })}
-        </div>
-        <div className="container d-flex justify-content-between m-3">
-          <button disabled={page<=1} type="button" onClick={handlePrevClick} className="btn btn-dark">Previous</button>
-          <button disabled={page+1>Math.ceil(totalResults/6)} type="button" onClick={handleNextClick} className="btn btn-dark">Next</button>
-
         </div>
       </div>
     );
